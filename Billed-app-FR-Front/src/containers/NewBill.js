@@ -32,7 +32,7 @@ export default class NewBill {
     if(fileExtension !=="jpeg" && fileExtension !=="jpg" && fileExtension !=="png"){
       // impleted to clear the field if the wrong extension is used
       document.getElementById("file-input-new-bill").value=null;
-
+      window.alert("Wrong file extension, add a png, a jpeg or a jpg.")
       return false
     }
     formData.append('file', file)
