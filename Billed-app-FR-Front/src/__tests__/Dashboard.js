@@ -234,7 +234,7 @@ describe('Given I am connected as Admin and I am on Dashboard page and I clicked
       userEvent.click(eye)
       expect(handleClickIconEye).toHaveBeenCalled()
 
-      console.log(eye)
+      //console.log(eye)
       const modale = screen.getByTestId('modaleFileAdmin')
       expect(modale).toBeTruthy()
     })

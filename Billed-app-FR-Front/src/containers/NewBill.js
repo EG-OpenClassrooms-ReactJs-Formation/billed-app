@@ -18,21 +18,25 @@ export default class NewBill {
   }
   handleChangeFile = e => {
     console.log("Test in progress")
-    const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
+    var file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
-    formData.append('file', file)
-    formData.append('email', email)
     
-    /*
-    //console.log(fileName.split('.').pop())
+    
+    
+    
     const fileExtension = fileName.split('.').pop()
+    
     if(fileExtension !=="jpeg" && fileExtension !=="jpg" && fileExtension !=="png"){
+      // impleted to clear the field if the wrong extension is used
+      document.getElementById("file-input-new-bill").value=null;
+
       return false
     }
-    */
+    formData.append('file', file)
+    formData.append('email', email)
     this.store
     .bills()
     .create({
@@ -42,7 +46,7 @@ export default class NewBill {
       }
     })
     .then(({fileUrl, key}) => {
-      console.log(fileUrl)
+      //console.log(fileUrl)
       this.billId = key
       this.fileUrl = fileUrl
       this.fileName = fileName
@@ -53,7 +57,7 @@ export default class NewBill {
   handleSubmit = e => {
     console.log("Test in progress")
     e.preventDefault()
-    console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
+    //console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {
       email,

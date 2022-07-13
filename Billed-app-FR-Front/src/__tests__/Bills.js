@@ -137,7 +137,7 @@ describe("Given I am a user connected as employee", () => {
         })
         bill.getBills()
         const iconEye = screen.getAllByTestId('icon-eye')
-        console.log(iconEye.length)
+        //console.log(iconEye.length)
         expect(iconEye.length > 0).toBeTruthy()
 
     })
@@ -173,7 +173,7 @@ describe("Given I am a user connected as employee", () => {
         //console.log(message.length)
         var errorMessage = ""
         message.forEach(messageElement => {
-          console.log(messageElement.innerHTML)
+          //console.log(messageElement.innerHTML)
           if(messageElement.innerHTML == "refused"){
             errorMessage = messageElement.innerHTML
           }
@@ -197,11 +197,10 @@ describe("Given I am a user connected as employee", () => {
             document, onNavigate, store, bills, localStorage: window.localStorage
           })
           const billsGet = await bill.getBills()
-          //console.log(billsGet)
+          
           // Verify the length to be equal to the mock list
           expect(billsGet.length === 4)
           
-
       })
       
     })
