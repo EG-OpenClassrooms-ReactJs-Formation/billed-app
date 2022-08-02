@@ -30,7 +30,6 @@
         // Create a file
         let file = new File(['test'], 'test-img.webp', { type: 'image/webp' });
   
-        
         Object.defineProperty(document.querySelector(`input[data-testid="file"]`), 'files', {
           value: [file]
         })
@@ -44,10 +43,14 @@
         newBill.fileUrl = "./justificatifs/" + newBill.fileName
         // Submit the form
         const formNewBill = document.querySelector(`form[data-testid="form-new-bill"]`)
-        fireEvent.submit(formNewBill)
+
+        const resultEvent = fireEvent.submit(formNewBill)
+        //expect(newBill.handleChangeFile).toThrow(TypeError)
+        
+        //expect(newBill.handleChangeFile).toThrow(TypeError);
+        
         // Test if the function has been called
-        //expect(localStorage.getItem).toBeCalledWith("user")
-        //expect(window.alert).toHaveBeenCalled()
+
       })
       
       test("Then I can submit a form",  () => {
@@ -70,16 +73,19 @@
         newBill.fileUrl = "./justificatifs/" + newBill.fileName
         // Add the function in the jest scope
 
-        const createBill = jest.fn(newBill.createBill)
+        const createBill = jest.fn(newBill.handleSubmit)
         const onNavigateFunction = jest.fn(newBill.onNavigate)
         // Submit the form
         const formNewBill = document.querySelector(`form[data-testid="form-new-bill"]`)
-        fireEvent.submit(formNewBill)
-
+        //fireEvent.submit(formNewBill)
+        //fireEvent.submit(formNewBill)
+        const button = document.getElementById('btn-send-bill')
+        fireEvent.click(button);
         // Verify if the function has been called
-
+        
         //expect(createBill).toHaveBeenCalled()
-        //expect(onNavigateFunction).toHaveBeenCalled()
+        //expect(() => createBill()).toThrow("A form as been submit")
+        //expect(newBill.handleSubmit).toThrow(TypeError)
         //expect(window.alert).not.toHaveBeenCalled()
       })
       test("Then uploading a new file change the NewBill file information",  () => {
@@ -100,8 +106,8 @@
                 files: [newFile]
               }})
         
-        expect(newBill.handleChangeFile).toThrow(TypeError);     
-  
+        expect(newBill.handleChangeFile).toThrow(TypeError);
+
       })
     })
   })
@@ -132,6 +138,7 @@
         document.body.innerHTML = html
         const message = await screen.getByText(/Erreur 500/)
         expect(message).toBeTruthy()
+        
       })
     })
   })

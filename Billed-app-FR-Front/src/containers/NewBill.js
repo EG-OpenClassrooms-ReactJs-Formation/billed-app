@@ -24,15 +24,15 @@ export default class NewBill {
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
     
-    
-    
-    
-    const fileExtension = fileName.split('.').pop()
-    
+    const fileExtension = file.name.split('.').pop()
+    console.log(fileExtension + "file extension")
     if(fileExtension !=="jpeg" && fileExtension !=="jpg" && fileExtension !=="png"){
+      console.log('condition call')
       // impleted to clear the field if the wrong extension is used
       document.getElementById("file-input-new-bill").value=null;
-      window.alert("Wrong file extension, add a png, a jpeg or a jpg.")
+      //window.alert("Wrong file extension, add a png, a jpeg or a jpg.")
+      
+      throw new TypeError("Wrong file extension");
       return false
     }
     formData.append('file', file)
@@ -55,9 +55,10 @@ export default class NewBill {
     
   }
   handleSubmit = e => {
-    console.log("Test in progress")
+    console.log("Test handleSubmit in progress")
     e.preventDefault()
     //console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
+    
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {
       email,
@@ -72,6 +73,8 @@ export default class NewBill {
       fileName: this.fileName,
       status: 'pending'
     }
+    //throw "A form as been submit";
+    //throw "A form as been submit";
     this.updateBill(bill)
     this.onNavigate(ROUTES_PATH['Bills'])
   }
