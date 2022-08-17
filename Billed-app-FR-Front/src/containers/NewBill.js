@@ -28,9 +28,9 @@ export default class NewBill {
     console.log(fileExtension + "file extension")
     if(fileExtension !=="jpeg" && fileExtension !=="jpg" && fileExtension !=="png"){
       console.log('condition call')
-      // impleted to clear the field if the wrong extension is used
+      // implemented to clear the field if the wrong extension is used
       document.getElementById("file-input-new-bill").value=null;
-      //window.alert("Wrong file extension, add a png, a jpeg or a jpg.")
+      
       
       throw new TypeError("Wrong file extension");
       return false
@@ -73,8 +73,6 @@ export default class NewBill {
       fileName: this.fileName,
       status: 'pending'
     }
-    //throw "A form as been submit";
-    //throw "A form as been submit";
     this.updateBill(bill)
     this.onNavigate(ROUTES_PATH['Bills'])
   }

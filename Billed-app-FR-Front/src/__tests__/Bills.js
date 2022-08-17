@@ -57,22 +57,16 @@ describe("Given I am connected as an employee", () => {
         }
         
         const store = null
-        
         const bill = new Bills({
           document, onNavigate, store, bills, localStorage: window.localStorage
         })
         
-        //console.log(document.body.innerHTML)
-        
         const handleClickIconEye = jest.fn(bill.handleClickIconEye)
-        //const eye = screen.getByTestId('icon-eye')
         const iconEye = screen.getAllByTestId('icon-eye')
-        //const eye = container.querySelectorAll(`div[data-testid="icon-eye"]`)
         
         if (iconEye) iconEye.forEach(icon => {
           icon.addEventListener('click', () => handleClickIconEye(icon))
         })
-        //iconEye[0].addEventListener('click', () => handleClickIconEye(iconEye[0]))
         userEvent.click(iconEye[0])
         expect(handleClickIconEye).toHaveBeenCalled()
         
@@ -101,8 +95,6 @@ describe("Given I am connected as an employee", () => {
           document, onNavigate, store, bills, localStorage: window.localStorage
         })
         
-        //console.log(document.body.innerHTML)
-        
         const handleClickNewBill = jest.fn(bill.handleClickNewBill)
         const buttonNewBill = screen.getByTestId('btn-new-bill')
         
@@ -116,7 +108,7 @@ describe("Given I am connected as an employee", () => {
   })
 })
 
-// test d'intégration GET
+// Integration test GET
 describe("Given I am a user connected as employee", () => {
   describe("When I navigate to Bills", () => {
     test("fetches bills from mock API GET", async () => {
@@ -137,7 +129,6 @@ describe("Given I am a user connected as employee", () => {
         })
         bill.getBills()
         const iconEye = screen.getAllByTestId('icon-eye')
-        //console.log(iconEye.length)
         expect(iconEye.length > 0).toBeTruthy()
 
     })
@@ -168,12 +159,11 @@ describe("Given I am a user connected as employee", () => {
           }})
         window.onNavigate(ROUTES_PATH.Bills)
         await new Promise(process.nextTick);
-        //const message = document.querySelectorAll('td')
         const message = screen.getAllByTestId('statusBillEmployee')
-        //console.log(message.length)
+        
         var errorMessage = ""
         message.forEach(messageElement => {
-          //console.log(messageElement.innerHTML)
+          
           if(messageElement.innerHTML == "refused"){
             errorMessage = messageElement.innerHTML
           }

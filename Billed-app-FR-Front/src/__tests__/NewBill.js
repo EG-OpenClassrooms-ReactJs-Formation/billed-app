@@ -42,15 +42,13 @@
         newBill.fileName = document.querySelector(`input[data-testid="file"]`).files[0].name
         newBill.fileUrl = "./justificatifs/" + newBill.fileName
         // Submit the form
+        const createBill = jest.fn(newBill.handleChangeFile)
+
         const formNewBill = document.querySelector(`form[data-testid="form-new-bill"]`)
-
         const resultEvent = fireEvent.submit(formNewBill)
-        //expect(newBill.handleChangeFile).toThrow(TypeError)
         
-        //expect(newBill.handleChangeFile).toThrow(TypeError);
-        
-        // Test if the function has been called
-
+        // Test if the function has been called and return false
+        expect(createBill === false)
       })
       
       test("Then I can submit a form",  () => {
@@ -72,21 +70,14 @@
         newBill.fileName = document.querySelector(`input[data-testid="file"]`).files[0].name
         newBill.fileUrl = "./justificatifs/" + newBill.fileName
         // Add the function in the jest scope
-
         const createBill = jest.fn(newBill.handleSubmit)
         const onNavigateFunction = jest.fn(newBill.onNavigate)
         // Submit the form
         const formNewBill = document.querySelector(`form[data-testid="form-new-bill"]`)
-        //fireEvent.submit(formNewBill)
-        //fireEvent.submit(formNewBill)
         const button = document.getElementById('btn-send-bill')
         fireEvent.click(button);
         // Verify if the function has been called
-        
-        //expect(createBill).toHaveBeenCalled()
-        //expect(() => createBill()).toThrow("A form as been submit")
-        //expect(newBill.handleSubmit).toThrow(TypeError)
-        //expect(window.alert).not.toHaveBeenCalled()
+        expect(newBill.handleSubmit).toThrow(TypeError)
       })
       test("Then uploading a new file change the NewBill file information",  () => {
 
