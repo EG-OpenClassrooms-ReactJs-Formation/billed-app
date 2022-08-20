@@ -34,7 +34,10 @@ export default class {
       .bills()
       .list()
       .then(snapshot => {
-        const bills = snapshot
+        // Order the bills to be get in chronological order
+        const antiChrono = (a, b) => (new Date(b.date) - new Date(a.date))
+        const snapshotOrdered = [...snapshot].sort(antiChrono)
+        const bills = snapshotOrdered
           .map(doc => {
             try {
               return {
@@ -45,7 +48,7 @@ export default class {
             } catch(e) {
               // if for some reason, corrupted data was introduced, we manage here failing formatDate function
               // log the error and return unformatted date in that case
-              //console.log(e,'for',doc)
+              console.log(e,'for',doc)
               return {
                 ...doc,
                 date: doc.date,
@@ -54,7 +57,7 @@ export default class {
             }
           })
           //console.log('length', bills.length)
-          //console.log(bills)
+        console.log(bills)
         return bills
       })
     }

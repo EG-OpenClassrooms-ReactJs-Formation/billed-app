@@ -24,11 +24,7 @@ const rows = (data) => {
 }
 
 export default ({ data: bills, loading, error }) => {
-  // Filter the bills by date before generate the UI
-  if(bills){
-    const antiChrono = (a, b) => ((a.date < b.date) ? 1 : -1)
-    bills = [...bills].sort(antiChrono)
-  }
+  
   const modal = () => (`
     <div class="modal fade" id="modaleFile" data-testid="modaleFileEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
